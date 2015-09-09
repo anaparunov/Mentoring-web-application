@@ -1,0 +1,50 @@
+{% extends "PinBundle::base.html.twig" %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Courses</h3>
+		</div>
+	</div>
+	<div class="row">
+		{% for course in courses %}
+			<div class="list-group">
+				<div class="list-group-item">
+					<div class="row-action-primary">
+						<i class="mdi-content-content-paste"></i>
+					</div>
+					<div class="row-content">
+						<div class="least-content">
+							{{ course.code }}
+							<a class="btn btn-info btn-fab mdi-content-create"
+								href="{{ path('admin_course_edit', { courseId: course.id }) }}"></a>
+
+							<form class="form-inline" action="{{ path('admin_course_delete', { courseId: course.id })
+							}}" method="post">
+								<button class="btn btn-info btn-fab mdi-action-delete" type="submit"></button>
+								<input name="_token" hidden value="{{ csrf_token('admin') }}" />
+							</form>
+						</div>
+						<h4 class="list-group-item-heading">{{ course.name }}</h4>
+						<p class="list-group-item-text">
+							<strong>Score:</strong>
+							{{ course.score }} -
+							<strong>Semestar regular:</strong>
+							{{ course.semesterRegular }} -
+							<strong>Semester part time:</strong>
+							{{ course.semesterPartTime }}
+						</p>
+					</div>
+				</div>
+				<div class="list-group-separator"></div>
+			</div>
+		{% endfor %}
+	</div>
+	{% if is_granted('ROLE_ADMIN') %}
+		<div class="row">
+			<div class="col-md-12 text-right" style="margin-bottom: 40px; position: fixed; bottom: 20px; right: 20px;">
+				<a href="{{ path('admin_course_new') }}" class="btn btn-warning btn-fab btn-raised mdi-content-add"></a>
+			</div>
+		</div>
+	{% endif %}
+{% endblock body %}

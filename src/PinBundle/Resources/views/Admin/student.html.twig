@@ -1,0 +1,84 @@
+{% extends "PinBundle::base.html.twig" %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-6">
+			<h3>Courses</h3>
+
+			<div class="row">
+				{% for course in courses %}
+					<form action="{{ path('entry_approve', { studentId: student.id, courseId: course.id }) }}"
+					      method="post">
+						<div class="list-group">
+							<div class="list-group-item">
+								<div class="row-content">
+									<div class="least-content">
+										<button type="submit" class="btn btn-info btn-fab mdi-content-add"></button>
+									</div>
+									<h4 class="list-group-item-heading">{{ course.name }}</h4>
+								</div>
+							</div>
+						</div>
+						<input name="_token" hidden value="{{ csrf_token('entry') }}"/>
+					</form>
+				{% endfor %}
+			</div>
+
+		</div>
+		<div class="col-md-6">
+			<h3>Application for {{ student.username }}</h3>
+
+			{% for semester, entries in semesters %}
+				<h4>Semester {{ semester }}</h4>
+				<div class="row">
+					{% for entry in entries %}
+						<div class="list-group">
+							<div class="list-group-item">
+								<div class="row-content">
+									<div class="least-content">
+										{% if entry.status == constant('PinBundle\\Entity\\Entry::STATUS_PASSED') %}
+											<span class="label label-success">Passed</span>
+										{% elseif entry.status == constant('PinBundle\\Entity\\Entry::STATUS_REQUESTED') %}
+											<form class="form-inline"
+											      action="{{ path('entry_cancel', { studentId: student
+												      .id, courseId:
+												      entry.course.id }) }}"
+											      method="post">
+												<button class="btn btn-info btn-fab mdi-content-clear" type="submit"
+												        title="Disapprove"></button>
+												<input name="_token" hidden value="{{ csrf_token('entry') }}"/>
+											</form>
+											<form class="form-inline" action="{{ path('entry_approve', { studentId:
+												student.id, courseId: entry.course.id }) }}"
+											      method="post">
+												<button class="btn btn-info btn-fab mdi-action-done" type="submit"
+												        title="Approve"></button>
+												<input name="_token" hidden value="{{ csrf_token('entry') }}"/>
+											</form>
+										{% else %}
+											<form class="form-inline" action="{{ path('entry_cancel', { studentId:
+												student.id, courseId: entry.course.id }) }}"
+											      method="post">
+												<button class="btn btn-info btn-fab mdi-content-clear" type="submit"
+												        title="Cancel"></button>
+												<input name="_token" hidden value="{{ csrf_token('entry') }}"/>
+											</form>
+											<form class="form-inline" action="{{ path('entry_pass', { studentId: student
+												.id, courseId: entry.course.id }) }}"
+											      method="post">
+												<button type="submit" title="Pass" class="btn btn-info btn-fab
+											mdi-action-done-all"></button>
+												<input name="_token" hidden value="{{ csrf_token('entry') }}"/>
+											</form>
+										{% endif %}
+									</div>
+									<h4 class="list-group-item-heading">{{ entry.course.name }}</h4>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock body %}

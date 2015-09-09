@@ -1,0 +1,16 @@
+{
+  "name": "pintheme",
+  "version": "0.0.1",
+  "authors": [
+    "Ana Parunov"
+  ],
+  "main": "index.php",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

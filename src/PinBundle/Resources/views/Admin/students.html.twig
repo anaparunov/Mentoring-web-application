@@ -1,0 +1,31 @@
+{% extends "PinBundle::base.html.twig" %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Students</h3>
+		</div>
+	</div>
+	<div class="row">
+		{% for student in students %}
+			<div class="list-group">
+				<div class="list-group-item">
+					<div class="row-action-primary">
+						<i class="mdi-content-content-paste"></i>
+					</div>
+					<div class="row-content">
+						<div class="least-content">
+							<a class="btn btn-info btn-fab mdi-content-create" href="{{ path('admin_student', { studentId : student.id }) }}"></a>
+						</div>
+						<h4 class="list-group-item-heading">{{ student.username }}</h4>
+
+						<p class="list-group-item-text">
+							<strong>Student email:</strong> {{ student.email }}
+						</p>
+					</div>
+				</div>
+				<div class="list-group-separator"></div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock body %}

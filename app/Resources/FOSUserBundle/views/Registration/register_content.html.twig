@@ -1,0 +1,47 @@
+{% trans_default_domain 'FOSUserBundle' %}
+	<div class="row">
+		<div class="col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
+
+			<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST"
+			      class="form-horizontal">
+				<fieldset>
+<legend>Registration</legend>
+					<div class="form-group">
+						{{ form_label(form.email, 'Email', { 'label_attr': {'class': 'control-label col-md-12'} }) }}
+						<div class="col-md-12">
+							{{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+						</div>
+					</div>
+					<div class="form-group">
+						{{ form_label(form.username, 'Username', { 'label_attr': {'class': 'control-label col-md-12'}
+						}) }}
+						<div class="col-md-12">
+							{{ form_widget(form.username, { 'attr': {'class': 'form-control'} }) }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						{{ form_label(form.plainPassword.first, 'Password', { 'label_attr': {'class': 'control-label
+						col-md-12'} }) }}
+						<div class="col-md-12">
+							{{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control'} }) }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						{{ form_label(form.plainPassword.second, 'Password', { 'label_attr': {'class': 'control-label
+						col-md-12'} }) }}
+						<div class="col-md-12">
+							{{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control'} }) }}
+						</div>
+					</div>
+
+					<div>
+						<input class="btn btn-primary btn-block" type="submit"
+						       value="{{ 'registration.submit'|trans }}"/>
+					</div>
+					{{ form_rest(form) }}
+				</fieldset>
+			</form>
+		</div>
+	</div>

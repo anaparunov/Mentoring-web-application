@@ -1,0 +1,33 @@
+<div class="navbar navbar-default">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-warning-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="javascript:void(0)">
+			<i class="mdi-maps-local-library"></i>College Mentoring App</a>
+	</div>
+	<div class="navbar-collapse collapse navbar-warning-collapse">
+		<ul class="nav navbar-nav">
+			{% if is_granted('ROLE_ADMIN') %}
+				<li class="{% if app.request.get('_route') == 'admin_courses' %}active{% endif %}">
+					<a href="{{ path('admin_courses') }}">Courses</a>
+				</li>
+				<li class="{% if app.request.get('_route') == 'admin_students' %}active{% endif %}">
+					<a href="{{ path('admin_students') }}">Students</a>
+				</li>
+			{% endif %}
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+			{% if app.user %}
+				<li><a href="">{{ app.user.username }}</a></li>
+				<li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+			{% else %}
+				<li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+				<li><a href="{{ path('fos_user_registration_register') }}">Registration</a></li>
+			{% endif %}
+		</ul>
+	</div>
+</div>

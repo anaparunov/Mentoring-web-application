@@ -1,0 +1,41 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>College Mentoring App</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic&amp;subset=latin,latin-ext">
+	<link rel="stylesheet" href="{{ asset('theme/bower_components/bootstrap-material-design/dist/css/material.min.css') }}" />
+	<link rel="stylesheet" href="{{ asset('theme/bower_components/bootstrap-material-design/dist/css/ripples.min.css') }}" />
+	<link rel="stylesheet" href="{{ asset('theme/bower_components/bootstrap-material-design/dist/css/material-fullpalette.min.css') }}" />
+	<link rel="stylesheet" href="{{ asset('theme/custom.css') }}" />
+	{% block stylesheet %}
+	{% endblock %}
+</head>
+<body>
+
+{% include 'PinBundle::_Helpers/navigation.html.twig' %}
+
+<div class="container">
+{% block body %}
+{% endblock %}
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="{{ asset('theme/bower_components/bootstrap-material-design/dist/js/ripples.min.js') }}"></script>
+<script src="{{ asset('theme/bower_components/bootstrap-material-design/dist/js/material.min.js') }}"></script>
+<script>
+	$(function() {
+		$.material.init();
+	});
+</script>
+
+{% block javascript %}
+{% endblock %}
+</body>
+</html>
